@@ -5,8 +5,6 @@ function App() {
   let [val, setVal] = useState(0);
   let [arr, setArr] = useState([]);
 
-  // const array = ["1", "2", "+", "2", "-", "0", "*"];
-
   // const numArray = array.map((el) => {
   //   if (!parseInt(el)) {
   //     return el;
