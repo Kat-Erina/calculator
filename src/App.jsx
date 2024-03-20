@@ -2,23 +2,24 @@ import { useState } from "react";
 
 function App() {
   let [total, setTotal] = useState("");
-  let [val, setVal] = useState(0);
+  let [val, setVal] = useState("");
   let [arr, setArr] = useState([]);
 
-  // const numArray = array.map((el) => {
-  //   if (!parseInt(el)) {
-  //     return el;
-  //   }
-  //   return parseInt(el);
-  // });
-  // console.log(numArray);
-
-  // function getValue(param) {
-  //   console.log(param);
-  // }
-
-  console.log(total);
+  function calculations(param) {
+    if (total) {
+      let result = eval(param.join(""));
+      // console.log(result);
+      setArr([result]);
+      setTotal(result);
+    } else {
+      let result = eval(param.join(""));
+      // console.log(result);
+      setTotal(result);
+      setArr([result]);
+    }
+  }
   console.log(arr);
+
   return (
     <>
       <div>
@@ -34,9 +35,6 @@ function App() {
         <button
           value="3"
           onClick={(e) => {
-            // getValue(e.target.value);
-            // setTotal((prev) => prev + e.target.value);
-            // console.log(total);
             let newarr = [...arr, e.target.value];
             setArr(newarr);
           }}
@@ -46,9 +44,6 @@ function App() {
         <button
           value="+"
           onClick={(e) => {
-            // getValue(e.target.value);
-            // setTotal((prev) => prev + e.target.value);
-            // console.log(total);
             let newarr = [...arr, e.target.value];
             setArr(newarr);
           }}
@@ -58,9 +53,6 @@ function App() {
         <button
           value="2"
           onClick={(e) => {
-            // getValue(e.target.value);
-            // setTotal((prev) => prev + e.target.value);
-            // console.log(total);
             let newarr = [...arr, e.target.value];
             setArr(newarr);
           }}
@@ -70,9 +62,6 @@ function App() {
         <button
           value="*"
           onClick={(e) => {
-            // getValue(e.target.value);
-            // setTotal((prev) => prev + e.target.value);
-            // console.log(total);
             let newarr = [...arr, e.target.value];
             setArr(newarr);
           }}
@@ -81,12 +70,15 @@ function App() {
         </button>
         <button
           value="="
-          onClick={(e) => {
-            console.log(arr);
+          onClick={() => {
+            calculations(arr);
+            console.log(val);
           }}
         >
           =
         </button>
+
+        <p>{arr}</p>
       </div>
     </>
   );
