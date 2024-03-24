@@ -1,119 +1,86 @@
 import { useState } from "react";
-import Decimal from "decimal.js";
-// const Decimal = require("decimal.js");
-
-// import Decimal from "decimal.js";
-
-// import { Decimal } from "decimal.js";
-
-// let y = new Decimal("07+7");
-// console.log(y.join());
-// let z = new Decimal("0.8");
-// let res = y.times(z);
-// console.log(res.toString());
 
 function App() {
-  let [total, setTotal] = useState("");
   let [arr, setArr] = useState([]);
   let [isTrue, setIsTrue] = useState(false);
-
-  function calculations(param) {
-    param.forEach((el) => {
-      console.log(el);
-    });
-
-    let result = eval(param.join(""));
-
-    setTotal(result);
-    setArr([result]);
-    setIsTrue(true);
-  }
-  console.log(isTrue);
+  let numArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
   let operators = ["+", "-", "*", "/"];
 
+  function calculations(param) {
+    if (operators.includes(arr[arr.length - 1]) || arr[arr.length - 1] == ".") {
+      alert("Please put valid number");
+      return;
+    } else {
+      let result = eval(param.join(""));
+      if (result === Infinity) {
+        setArr([0]);
+      } else {
+        // setArr([result]);
+        // result === Infinity ? setArr(0) : setArr([result, param]);
+        if (result === Infinity) {
+          console.log("xramuna");
+          setArr([0, param]);
+        } else {
+          setArr([result, param]);
+        }
+        setIsTrue(true);
+      }
+    }
+  }
+
   function update(param) {
     setIsTrue(false);
-
-    if (
-      (arr.length === 0 && operators.includes(param)) ||
-      (arr.length === 0 && param == ".")
-    ) {
+    if (arr.length == 0 && !numArray.includes(param)) {
       alert("Please write a valid number");
       return;
     } else if (
       arr.length == "1" &&
       arr[0] == "0" &&
-      param != "."
-      //  ||
-      // operators.includes(param)
+      operators.includes(param)
     ) {
-      console.log("badzaghua");
-      return;
-    } else if (operators.includes(param) && arr.length > 0) {
-      if (
-        arr.includes("+") ||
-        arr.includes("*") ||
-        arr.includes("/") ||
-        arr.includes("-") ||
-        arr.includes(".")
-      ) {
-        if (
-          arr[arr.length - 1] == "*" ||
-          arr[arr.length - 1] == "+" ||
-          arr[arr.length - 1] == "-" ||
-          arr[arr.length - 1] == "/" ||
-          arr[arr.length - 1] == "."
-        ) {
-          console.log("sheicavs");
-          if (param === ".") {
-            return;
-          } else {
-            arr[arr.length - 1] = param;
-            console.log("bijo");
-            setArr(arr);
-          }
-        } else if (
-          param == "." &&
-          typeof Number(arr[arr.length - 1]) != "number"
-        ) {
-          return;
-        } else {
-          console.log("bijo");
-          let result = eval(arr.join(""));
-
-          setTotal(result);
-          setArr([result, param]);
-        }
-      } else {
-        console.log("bijo");
+      let newArr = [...arr, param];
+      setArr(newArr);
+    } else if (arr.length == "1" && arr[0] == "0" && !isTrue) {
+      if (param == ".") {
         let newArr = [...arr, param];
         setArr(newArr);
+        return;
+      } else return;
+    } else if (operators.includes(param) && arr.length > 0) {
+      if (
+        arr[arr.length - 1] == "*" ||
+        arr[arr.length - 1] == "+" ||
+        arr[arr.length - 1] == "-" ||
+        arr[arr.length - 1] == "/" ||
+        arr[arr.length - 1] == "."
+      ) {
+        if (operators.includes(param)) {
+          arr[arr.length - 1] = param;
+
+          setArr(arr);
+        }
+      } else {
+        let result = eval(arr.join(""));
+
+        if (result === Infinity) {
+          console.log("xramuna");
+          setArr([0, param]);
+        } else {
+          setArr([result, param]);
+        }
       }
     } else {
-      if (typeof arr[0] == "number" && arr.length == 1 && param == ".") {
-        console.log("ki");
-        setTotal("");
-
-        setArr([param]);
-        return;
-      } else if (arr.includes(".") && param == ".") {
-        console.log("wertili u kve gvaqvs");
+      if (arr.includes(".") && param == ".") {
         return;
       } else if (isTrue && arr.length == 1) {
-        console.log("bijo");
-        setTotal("");
-
         setArr([param]);
       } else {
-        console.log("bijo");
         if (
-          // param == "0" &&
           operators.includes(arr[arr.length - 2]) &&
           arr[arr.length - 1] == "0" &&
           param != "."
         ) {
-          console.log("siaxle");
           alert("Please write valid number");
           return;
         } else {
@@ -123,8 +90,17 @@ function App() {
       }
     }
   }
-  console.log(arr);
 
+  function removeLastItem() {
+    arr.pop();
+    console.log(arr);
+    setArr(arr);
+  }
+
+  function clearAll() {
+    setArr([]);
+  }
+  console.log(arr);
   return (
     <>
       <div>
@@ -261,8 +237,21 @@ function App() {
         >
           =
         </button>
+        <button
+          onClick={() => {
+            let newArr = [...arr];
+            newArr.pop();
+
+            // console.log(arr, newArr);
+            setArr(newArr);
+          }}
+        >
+          C
+        </button>
+        <button onClick={clearAll}>CE</button>
         {console.log(arr)}
-        <p>{arr.length > 0 ? arr : " "}</p>
+        {/* <p>{arr.length > 0 ? arr : " "}</p> */}
+        <p>{arr}</p>
       </div>
     </>
   );
