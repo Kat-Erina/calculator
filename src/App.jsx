@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Decimal from "decimal.js";
 import Form from "./components/Form";
 import { calculations, update } from "./helperFunctions";
 
@@ -23,6 +24,11 @@ function App() {
   function clearAll() {
     setArr([]);
   }
+
+  let x = new Decimal("0.8");
+  let y = new Decimal("0.7");
+  console.log(x.times(y).valueOf());
+
   return (
     <>
       <Form

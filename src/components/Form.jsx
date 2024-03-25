@@ -23,25 +23,29 @@ const Form = ({
     "+",
     "-",
     "/",
+    "*",
   ];
 
   return (
-    <form>
-      <p>{arr}</p>
-      {numArray.map((el, id) => {
-        return (
-          <Button
-            key={id}
-            value={el}
-            handleUpdate={handleUpdate}
-            operators={operators}
-          />
-        );
-      })}
-
-      <Button value="=" handleCalculation={handleCalculation}></Button>
-      <Button value="CE" clearAll={clearAll}></Button>
-      <Button value="C" removeLastItem={removeLastItem}></Button>
+    <form className="flex flex-col w-full bg-red-200 md:w-[300px] overflow-hidden rounded-xl">
+      <p className="w-full p-6 paragraph text-wrap bg-teal-700 text-slate-50 text-2xl">
+        {arr}
+      </p>
+      <div className=" grid grid-cols-4 gap-5 p-4 rounded-lg bg-teal-800">
+        <Button value="CE" clearAll={clearAll}></Button>
+        <Button value="C" removeLastItem={removeLastItem}></Button>
+        {numArray.map((el, id) => {
+          return (
+            <Button
+              key={id}
+              value={el}
+              handleUpdate={handleUpdate}
+              operators={operators}
+            />
+          );
+        })}
+        <Button value="=" handleCalculation={handleCalculation}></Button>
+      </div>
     </form>
   );
 };
