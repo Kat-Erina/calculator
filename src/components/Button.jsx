@@ -10,7 +10,7 @@ const Button = ({
 }) => {
   return (
     <button
-      className=" w-14 h-14 rounded-full bg-slate-600 hover:scale-125 hover:shadow-lg hover:shadow-cyan-500/50  text-xl text-slate-50"
+      className=" w-14 h-14 rounded-full  bg-teal-700 hover:scale-125 hover:shadow-lg hover:shadow-cyan-500/50 hover:text-2xl  text-xl text-slate-50"
       onClick={(e) => {
         e.preventDefault();
         if (value === "=") {

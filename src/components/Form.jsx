@@ -27,11 +27,11 @@ const Form = ({
   ];
 
   return (
-    <form className="flex flex-col w-full bg-red-200 md:w-[300px] overflow-hidden rounded-xl">
-      <p className="w-full p-6 paragraph text-wrap bg-teal-700 text-slate-50 text-2xl">
+    <form className="flex flex-col  bg-red-200 w-[300px] overflow-hidden rounded-xl">
+      <p className="w-full min-h-20 p-6 paragraph text-wrap bg-teal-700 text-slate-50 text-2xl">
         {arr}
       </p>
-      <div className=" grid grid-cols-4 gap-5 p-4 rounded-lg bg-teal-800">
+      <div className=" grid grid-cols-4 gap-5 p-4 rounded-b-lg bg-emerald-950">
         <Button value="CE" clearAll={clearAll}></Button>
         <Button value="C" removeLastItem={removeLastItem}></Button>
         {numArray.map((el, id) => {

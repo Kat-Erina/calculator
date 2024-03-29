@@ -13,9 +13,8 @@ body {
   width: 100vw;
 }
 #root {
-  min-height: 100%;
+  height: 100%;
   width: 100%;
-  background-color: rgb(71, 74, 74);
   display: flex;
   justify-content: center;
   align-items: center;
