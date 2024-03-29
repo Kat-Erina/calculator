@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Decimal from "decimal.js";
 import Form from "./components/Form";
 import { calculations, update } from "./helperFunctions";
+import Navbar from "./components/Navbar";
 
 function App() {
   let [arr, setArr] = useState([]);
@@ -25,12 +25,9 @@ function App() {
     setArr([]);
   }
 
-  let x = new Decimal("0.8");
-  let y = new Decimal("0.7");
-  console.log(x.times(y).valueOf());
-
   return (
-    <>
+    <section className="flex flex-col gap-6">
+      <Navbar />
       <Form
         handleUpdate={handleUpdate}
         handleCalculation={handleCalculation}
@@ -39,7 +36,7 @@ function App() {
         removeLastItem={removeLastItem}
         operators={operators}
       />
-    </>
+    </section>
   );
 }
 
